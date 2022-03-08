@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css" />
+    <favicon src="" alt="x"></favicon>
+    <title>Hangman</title>
+</head>
+<body>
+    <main class="main-container">
+        <h1>Hangman</h1>
+        <h2>Wrong Guesses: <span id="wrong"></span></h2>
+        <section id="mid-section">
+            <div class="guessed-words-div">
+                <!-- <ul id="guessed-words">
+                    <li>Word: <span id="checking"></span></li>
+                    <li>Check Letter: <span id='checkLetter'></span></li>
+                    <li>Position: <span id='position-text'></span></li>
+                </ul> -->
+
+                <div class="word">
+                    <span id="word"></span>
+                    <h5>GUESS the WORD</h5>
+                </div>
+            </div>
+
+
+            <div id="hang-man">
+                <h3>I'm a Man to be Hanged</h3>
+                <img src="james-franco.jpg"/>
+                <h2 id="result">Great! <br> I'm not DEAD!</h2>
+            </div>
+
+
+
+        </section>
+
+        
+        
+        <section id="bottom-section">
+            <div class="letter-choices">
+                <button id="a">A</button>
+                <button id="i">I</button>
+                <button id="c">C</button>
+                <button id="s">S</button>
+                <button id="f">F</button>
+                <button id="t">T</button>
+                <button id="h">H</button>
+                <button id="b">B</button>
+                <button id="d">D</button>
+                <button id="g">G</button>
+                <button id="x">X</button>
+                <button id="p">P</button>
+                <button id="m">M</button>
+            </div>
+
+            
+
+        </section>
+    </main>
+
+
+
+    <script src="script.js" defer></script>
+</body>
+</html>
