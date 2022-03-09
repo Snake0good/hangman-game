@@ -15,51 +15,61 @@
         <h2>Wrong Guesses: <span id="wrong"></span></h2>
         <section id="mid-section">
             <div class="guessed-words-div">
-                <!-- <ul id="guessed-words">
-                    <li>Word: <span id="checking"></span></li>
-                    <li>Check Letter: <span id='checkLetter'></span></li>
-                    <li>Position: <span id='position-text'></span></li>
-                </ul> -->
+                <h5>Remaining Guesses: <br> <span id="remaining-guesses">3</span></h5>
 
                 <div class="word">
-                    <span id="word"></span>
+                    <span id="word">--</span>
                     <h5>GUESS the WORD</h5>
                 </div>
-            </div>
 
+                <button id="new-word-btn">NEW WORD</button>
+            </div>
 
             <div id="hang-man">
-                <h3>I'm a Man to be Hanged</h3>
-                <img src="james-franco.jpg"/>
-                <h2 id="result">Great! <br> I'm not DEAD!</h2>
+                <h3 id="hang-man-phrase"></h3>
+                <img class="hang-man-pic" id="hang-man-pic" src="loser.gif"/>
             </div>
-
-
-
         </section>
 
         
         
         <section id="bottom-section">
             <div class="letter-choices">
-                <button id="a">A</button>
-                <button id="i">I</button>
-                <button id="c">C</button>
-                <button id="s">S</button>
-                <button id="f">F</button>
-                <button id="t">T</button>
-                <button id="h">H</button>
-                <button id="b">B</button>
-                <button id="d">D</button>
-                <button id="g">G</button>
-                <button id="x">X</button>
-                <button id="p">P</button>
-                <button id="m">M</button>
+                <div class="top-row-keys">
+                    <button class="letter-btn" id="q">Q</button>
+                    <button class="letter-btn" id="w">W</button>
+                    <button class="letter-btn" id="e">E</button>
+                    <button class="letter-btn" id="r">R</button>
+                    <button class="letter-btn" id="t">T</button>
+                    <button class="letter-btn" id="y">Y</button>
+                    <button class="letter-btn" id="u">U</button>
+                    <button class="letter-btn" id="i">I</button>
+                    <button class="letter-btn" id="o">O</button>
+                    <button class="letter-btn" id="p">P</button>
+                </div>
+                <div class="mid-row-keys">
+                    <button class="letter-btn" id="a">A</button>
+                    <button class="letter-btn" id="s">S</button>
+                    <button class="letter-btn" id="d">D</button>
+                    <button class="letter-btn" id="f">F</button>
+                    <button class="letter-btn" id="g">G</button>
+                    <button class="letter-btn" id="h">H</button>
+                    <button class="letter-btn" id="j">J</button>
+                    <button class="letter-btn" id="k">K</button>
+                    <button class="letter-btn" id="l">L</button>
+                </div>
+                <div class="bottom-row-keys">
+                    <button class="letter-btn" id="z">Z</button>
+                    <button class="letter-btn" id="x">X</button>
+                    <button class="letter-btn" id="c">C</button>
+                    <button class="letter-btn" id="v">V</button>
+                    <button class="letter-btn" id="b">B</button>
+                    <button class="letter-btn" id="n">N</button>
+                    <button class="letter-btn" id="m">M</button>
+                </div>                
             </div>
-
-            
-
         </section>
+
     </main>
 
 
