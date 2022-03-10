@@ -46,7 +46,7 @@ const randomWordBtn = document.querySelector('#random-word');
 const checkLetter = document.getElementById('checkLetter')
 const posText = document.getElementById('position-text')
 
-let wordList = ['CAT', 'FISH', 'SAT', 'HIT', 'THIS', 'CAST', 'JUMP', 'RUN', 'BORN', 'FLAP', 'CURD']
+let wordList = ['HORSE', 'BEGIN', 'FLY', 'FLASK', 'WRONG', 'BREAK', 'CRANE', 'BUMP', 'SAT', 'HIT', 'JOURNEY', 'RANGER', 'PYTHON']
 
 
 // wrong answer space 
@@ -61,10 +61,15 @@ let wordChoiceArr;
 
 // remaining guesses 
 let remainingGuessText = document.querySelector("#remaining-guesses");
-let remainingGuessNumber = 3;
+let numOfOriginalGuesses = 8;
+let remainingGuessNumber = numOfOriginalGuesses;
 
 
-
+// originally SET ALL the buttons to disabled
+let letterBtns = document.querySelectorAll(".letter-btn")
+for (let i=0; i<letterBtns.length; i++) {
+    letterBtns[i].disabled = true;
+}
 
 
 
@@ -76,6 +81,15 @@ function checkAnswer() {
         document.querySelector("#hang-man").style.visibility = 'visible'   
         document.querySelector("#hang-man-pic").src = "will-ferrell-cheer.gif";
         document.querySelector("#hang-man-phrase").innerText = "I LOVE WINNERS!";
+
+
+         // disable all the letter buttons 
+        for (let i=0; i<letterBtns.length; i++) {
+            letterBtns[i].disabled = true;
+        }
+
+    newWordButton.disabled = false;
+    newWordButton.style.animation = 'jiggle 0.7s infinite';
     }
 }
 
@@ -83,10 +97,28 @@ function loseFunction() {
     if (remainingGuessNumber <= 0 ) {
         document.querySelector("#hang-man").style.visibility = 'visible'   
         document.querySelector("#hang-man-pic").src = "loser.gif";
-        document.querySelector("#hang-man-phrase").innerText = "LOSER!";    }
+        document.querySelector("#hang-man-phrase").innerText = "LOSER!";  
+        
+
+        wordOnScreen.innerHTML = wordArray.join(" ");
+
+        
+         // disable all the letter buttons 
+         for (let i=0; i<letterBtns.length; i++) {
+            letterBtns[i].disabled = true;
+        }
+
+     newWordButton.disabled = false;
+     newWordButton.style.animation = 'jiggle 0.7s infinite';
+    }
 }
 
 function getNewWord() {
+    // diable the random word button
+    newWordButton.disabled = true;
+    newWordButton.style.animation = 'none';
+
+
     // this is a random number choice for the game
     number = Math.floor(Math.random() * wordList.length);
 
@@ -101,15 +133,91 @@ function getNewWord() {
     //show the word on the screen
     wordOnScreen.innerHTML = wordChoice;
 
+
+
+
     // reset everything 
     document.querySelector("#hang-man").style.visibility = 'hidden';
+
+    // reset the buttons to not disabled
+    for (let i=0; i<letterBtns.length; i++) {
+        letterBtns[i].disabled = false;
+    }
+
+    // reset the remaining guesses to 0
+    remainingGuessNumber = numOfOriginalGuesses;
+    remainingGuessText.innerText = remainingGuessNumber;
+
+
+    // reset the wrong guesses area to empty
+    wrongText = [];
+    wrongGuessTextArea.innerText = wrongText
 }
 
-
-const newWordButton = document.querySelector("#new-word-btn").addEventListener('click', getNewWord);
+// declare new word button and add event listener
+const newWordButton = document.querySelector("#new-word-btn")
+newWordButton.addEventListener('click', getNewWord);
 
 
 // buttons and stuff
+
+// =========== ALLLL BUTTONS ============ //
+// ALL keypresses
+document.addEventListener('keyup', (e) => {
+    let keyPressed = (e.code.slice(-1).toUpperCase());
+    let keyPressedBtn = (e.code.slice(-1).toLowerCase() + 'Btn');    
+
+
+    /// this is a bit of a mess, but fuN!
+    // changing the key pressed to the button object
+    obj = eval('({' + keyPressedBtn + '})')
+
+    // //obj.disabled = true;
+
+    // console.log('obj ' + obj)
+    // console.log(typeof obj)
+    // console.log(typeof qBtn)
+    // console.log('qBtn ' + qBtn)
+
+    // let stringToHTML = function (str) {
+    //     var parser = new DOMParser();
+    //     var doc = parser.parseFromString(str, 'text/html');
+    //     return doc.body;
+    // };
+
+    // let buttonPressed = stringToHTML(keyPressedBtn)
+
+    // buttonPressed.disabled = true;
+
+
+    
+    for (let i=0; i<wordArray.length; i++) {
+        if (wordArray[i] === keyPressed) {
+            let wordPos = wordArray.indexOf(wordArray[i]);
+            wordChoiceArr[wordPos] = keyPressed;
+            wordOnScreen.innerText = wordChoiceArr.join("  ");
+        } 
+    }
+
+    checkAnswer();
+
+    // this will check the word to find any letters that match
+    let hasTheLetter = wordArray.find(letter => letter === keyPressed)
+
+
+    if (hasTheLetter === undefined) {
+        wrongText.push(keyPressed);
+        wrongGuessTextArea.innerText = wrongText;
+        remainingGuessNumber--;
+        remainingGuessText.innerText = remainingGuessNumber;
+    }
+
+    loseFunction();
+
+})
+
+
+
 
 // ========== THE TOP ROW BUTTONS ================ // 
 // ========== THE TOP ROW BUTTONS ================ // 
@@ -135,7 +243,6 @@ qBtn.addEventListener('click', () => {
     // this will check the word to find any letters that match
     let hasTheLetter = wordArray.find(letter => letter === "Q")
 
-    console.log(hasTheLetter)
 
     if (hasTheLetter === undefined) {
         wrongText.push('Q');
@@ -167,8 +274,6 @@ wBtn.addEventListener('click', () => {
     // this will check the word to find any letters that match
     let hasTheLetter = wordArray.find(letter => letter === "W")
 
-    console.log(hasTheLetter)
-
     if (hasTheLetter === undefined) {
         wrongText.push('W');
         wrongGuessTextArea.innerText = wrongText;
@@ -198,8 +303,6 @@ eBtn.addEventListener('click', () => {
     // this will check the word to find any letters that match
     let hasTheLetter = wordArray.find(letter => letter === "E")
 
-    console.log(hasTheLetter)
-
     if (hasTheLetter === undefined) {
         wrongText.push('E');
         wrongGuessTextArea.innerText = wrongText;
@@ -228,8 +331,6 @@ rBtn.addEventListener('click', () => {
     // this will check the word to find any letters that match
     let hasTheLetter = wordArray.find(letter => letter === "R")
 
-    console.log(hasTheLetter)
-
     if (hasTheLetter === undefined) {
         wrongText.push('R');
         wrongGuessTextArea.innerText = wrongText;
@@ -257,8 +358,6 @@ tBtn.addEventListener('click', () => {
 
     // this will check the word to find any letters that match
     let hasTheLetter = wordArray.find(letter => letter === "T")
-
-    console.log(hasTheLetter)
 
     if (hasTheLetter === undefined) {
         wrongText.push('T');
@@ -449,7 +548,6 @@ aBtn.addEventListener('click', () => {
             // posText.innerHTML = wordArray;
             wordChoiceArr.splice(wordPos, 1, "A");
             wordOnScreen.innerText = wordChoiceArr.join(" ");
-            console.log('a answerTries ', answerTries);
         } 
     }
 
